@@ -1,10 +1,11 @@
 :root {
-  --accent-color: #FF0070;
-  --decorated-color: #FF0070;
-  --button-color: #FF0070;
+  --accent-color: #FF0070;  /* тут меняется на #FF8DCB*/
+  --decorated-color: #FF0070; /* тут меняется на #353430*/
+  --button-outline-color: rgba(255, 0, 112, 0.4);
   --text-color: #F1B2CE;
   --main-font: 'IBM Plex mono';
   --title-color: #DB00FF;
   --subtitle-color: #000028;
   --bg-color: #000028;
+  --bg-img: url(../images/cover-image-dark.png);
   }

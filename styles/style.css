@@ -1,8 +1,8 @@
 .page {
-  font-family: var(--main-font, 'IBM Plex mono'), sans-serif;
+  font-family: var(--main-font, 'IBM Plex mono'), monospace;
   font-weight: 400;
   background-color: var(--bg-color, #000028);  /*на случай, если картинка не загрузится*/
-  background-image: url(../images/cover-image-dark.png);
+  background-image: var(--bg-img, url(../images/cover-image-dark.png));
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
@@ -11,14 +11,15 @@
 /* HEADER */
 
 .header {
-  grid-template-rows: 0 0 1fr min-content 1fr 0;
+  position: relative;
+  grid-template-rows: 0 1fr min-content 1fr 0;
 }
 
 .header,
 .footer {
   display: grid;
   align-items: center;
-  height: 100vb;
+  min-height: 100vb;
   padding: 10px;
 }
 
@@ -44,14 +45,20 @@
   border-block-start: 0;
 }
 
+.header__decorated-el {
+  position: absolute;
+  display: block;
+  inset-block-start: 10px;
+  inset-inline-end: 28px;
+}
+
 .header__decorated-el::before {
   content: 'REC';
   position: absolute;
-  margin-inline-end: 10px;
   color: var(--decorated-color, #FF0070);
   font-size: 18px;
   line-height: 1.4;
-  inset-inline-end: clamp(28px, 7vi, 38px);
+  inset-inline-end: 10px;
 }
 
 .header__decorated-el::after {
@@ -62,41 +69,42 @@
   background-color: var(--decorated-color, #FF0070);
   inline-size: 9px;
   block-size: 9px;
-  inset-block-start: 18px;
-  inset-inline-end: 19px;
+  inset-block-start: 8px;
 }
 
 .header__theme-menu {
   justify-self: end;
-  color: var(--button-color, #FF0070);
+  color: var(--decorated-color, #FF0070);
   font-size: 18px;
-  line-height: 1.3;
+  line-height: 1;
 }
 
 .header__theme-menu-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 11px;
 }
 
 .header__theme-menu-button {
   border: none;
-  padding: 1px 13px;
+  padding: 3px 13px;
   text-transform: lowercase;
   background-color: transparent;
   cursor: pointer;
 }
 
 .header__theme-menu-button_active {
+  border: 1px solid currentColor;
   pointer-events: none;
 }
 
-.header__theme-menu-button.header__theme-menu-button_active {
-  border: 1px solid currentColor;
+.header__theme-menu-button:hover {
+  outline: 1px solid var(--button-outline-color, rgba(255, 0, 112, 0.4));
 }
 
-.header__theme-menu-button:hover {
-  outline: 1px solid rgba(255, 0, 112, 0.4);
+.header__theme-menu-button:focus,
+.link:focus {
+  outline: none;
 }
 
 .header__theme-menu-button:focus-visible {
@@ -116,11 +124,14 @@
   line-height: 0.825;
 }
 
-.subtitle-decor {
+.header__subtitle {
   color: var(--subtitle-color, #000028);
   font-weight: 700;
   font-size: 18px;
   line-height: 1.3;
+}
+
+.subtitle-decor {
   background-color: var(--accent-color, #FF0070);
 }
 
@@ -143,7 +154,7 @@
 }
 
 .main__title {
-  color: var(--accent-color, #FF0070);
+  color: var(--decorated-color, #FF0070);
   font-size: inherit;
 }
 
@@ -152,13 +163,21 @@
   padding-block-start: 50px;
 }
 
+.main__subtitle  {
+  color: var(--subtitle-color, #000028);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.main__subtext {
+  color: var(--subtitle-color, #000028);
+  font-weight: 400;
+}
+
 .main__text {
   padding-block-start: 10px;
   color: var(--text-color, #F1B2CE);
-}
-
-.main__subtitle-second {
-  font-weight: 400;
 }
 
 .main__section:has(.main__image) {
@@ -197,7 +216,7 @@
 
 .footer__title {
   text-align: center;
-  text-shadow: 2px 2px 0 var(--accent-color);
+  text-shadow: 2px 2px 0 var(--accent-color, #FF0070);
 }
 
 @media (width >= 768px) {
@@ -206,17 +225,17 @@
     padding: 20px;
   }
 
-  .header__decorated-el::after {
-    inset-block-start: 28px;
-    inset-inline-end: 29px;
+  .header__decorated-el {
+    inset-block-start: 20px;
+    inset-inline-end: 38px;
   }
 
   .header__title {
+    position: relative;
     inset-inline-end: 20px;
   }
 
   .title {
-    position: relative;
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
 
@@ -300,11 +319,19 @@
     flex-direction: row;
   }
 
+  .header__title  {
+    text-shadow: 4px 4px 0 #FF0070;
+  }
+
   .main__section:nth-child(2) > .main__title {
     max-inline-size: 315px;
   }
 
   .main__section:nth-child(2) > .main__list {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer__title {
+    text-shadow: 2px 2px 0 #FF0070;
   }
 }
